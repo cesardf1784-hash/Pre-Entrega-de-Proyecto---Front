@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Expertos en Ingeniería Civil, Seguridad e Higiene Laboral y Gestión Ambiental en la Provincia de Buenos Aires.">
+  <meta name="keywords" content="ingeniería civil, seguridad e higiene, gestión ambiental, proyectos hidráulicos, infraestructura vial, La Plata, Buenos Aires">
+  <meta name="author" content="PF Ingeniería">
+  <title>PF Ingeniería | Civil · Seguridad Laboral · Gestión Ambiental</title>
+  <!-- CLASE 5: Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- CLASE 5: Font Awesome (iconos) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* =============================================
+       CLASE 4: Variables CSS (Custom Properties)
+       CLASE 4: Selector universal + reset
+    ============================================= */
+    :root {
+      --verde-oscuro:  #1b3a2d;
+      --verde-medio:   #2d6a4f;
+      --verde-claro:   #40916c;
+      --verde-acento:  #52b788;
+      --verde-suave:   #d8f3dc;
+      --amarillo:      #e9c46a;
+      --naranja:       #f4a261;
+      --gris-oscuro:   #1a1f2e;
+      --gris-medio:    #3d4a5c;
+      --gris-texto:    #5c6b7a;
+      --gris-claro:    #f0f4f1;
+      --blanco:        #ffffff;
+      --sombra-sm: 0 2px 12px rgba(0,0,0,0.07);
+      --sombra-md: 0 6px 28px rgba(0,0,0,0.11);
+      --sombra-lg: 0 16px 52px rgba(0,0,0,0.15);
+      --radio:    8px;
+      --radio-lg: 14px;
+      --trans:    all 0.3s ease;
+      --max-w:    1160px;
+      --f-titulo: 'Montserrat', sans-serif;  /* CLASE 5 */
+      --f-cuerpo: 'Lato', sans-serif;        /* CLASE 5 */
+    }
+    /* CLASE 4: selector universal */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; font-size:16px; }
+    /* CLASE 4: selector de etiqueta */
+    body { font-family:var(--f-cuerpo); color:var(--gris-oscuro); background:var(--gris-claro); line-height:1.7; overflow-x:hidden; }
+    a  { text-decoration:none; color:inherit; }
+    ul { list-style:none; }
+    img { max-width:100%; display:block; }
+
+    /* ── UTILIDADES ── */
+    .cont { max-width:var(--max-w); margin:0 auto; padding:0 1.5rem; }
+    .secc { padding:5.5rem 0; }
+    .secc--gris   { background:#e8ede9; }
+    .secc--verde  { background:var(--verde-oscuro); color:#fff; }
+    .secc--oscuro { background:var(--gris-oscuro); color:#fff; }
+
+    .cab { text-align:center; margin-bottom:3rem; }
+    .etiq {
+      display:inline-block; color:var(--verde-acento);
+      font-size:0.78rem; font-weight:700; letter-spacing:2.5px;
+      text-transform:uppercase; margin-bottom:0.5rem;
+    }
+    .secc--verde .etiq { color:#a8d5b5; }
+    /* CLASE 4: selector de clase */
+    .tit-secc {
+      font-family:var(--f-titulo);
+      font-size:clamp(1.7rem,3.8vw,2.5rem); /* CLASE 5: clamp+vw */
+      font-weight:700; line-height:1.18; margin-bottom:0.9rem;
+    }
+    .desc { color:var(--gris-texto); max-width:560px; margin:0 auto; font-size:1.02rem; }
+    .secc--verde .desc, .secc--oscuro .desc { color:rgba(255,255,255,0.6); }
+
+    /* Botones */
+    .btn {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      padding:0.85rem 1.9rem; border-radius:var(--radio);
+      font-weight:700; font-size:0.92rem; font-family:var(--f-titulo);
+      cursor:pointer; border:2px solid transparent; transition:var(--trans);
+    }
+    .btn--p { background:var(--verde-acento); color:#fff; }
+    .btn--p:hover { background:var(--verde-claro); transform:translateY(-2px); box-shadow:0 8px 24px rgba(82,183,136,.35); }
+    .btn--b { background:transparent; color:#fff; border-color:rgba(255,255,255,.5); }
+    .btn--b:hover { background:rgba(255,255,255,.1); transform:translateY(-2px); }
+    .btn--d { background:var(--verde-oscuro); color:#fff; }
+    .btn--d:hover { background:var(--verde-medio); transform:translateY(-2px); }
+
+    /* Badges */
+    .badge { display:inline-flex; align-items:center; gap:0.3rem; padding:0.22rem 0.7rem; border-radius:50px; font-size:0.74rem; font-weight:700; }
+    .badge--ok  { background:#d0f0dc; color:#1a6e3e; }
+    .badge--wip { background:#fef5d0; color:#7a5300; }
+    .badge--pla { background:#ddeeff; color:#1547a0; }
+
+    /* Reveal */
+    .rev { opacity:0; transform:translateY(26px); transition:opacity .65s ease,transform .65s ease; }
+    .rev.visible { opacity:1; transform:none; }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
+
+    /* =============================================
+       CLASE 6: HEADER / NAV  position:fixed + Flexbox
+    ============================================= */
+    /* CLASE 4: BEM — .nav */
+    .nav {
+      position:fixed; /* CLASE 6 */
+      top:0; left:0; width:100%; z-index:1000;
+      background:rgba(27,58,45,.97); backdrop-filter:blur(14px);
+      padding:1rem 1.5rem; transition:var(--trans);
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .nav--chico { padding:.6rem 1.5rem; box-shadow:0 4px 30px rgba(0,0,0,.22); }
+    .nav__i { display:flex; /* CLASE 6: Flexbox */ align-items:center; justify-content:space-between; max-width:var(--max-w); margin:0 auto; }
+    .nav__logo { font-family:var(--f-titulo); font-size:1.45rem; font-weight:900; color:#fff; letter-spacing:-.5px; display:flex; align-items:center; gap:.6rem; }
+    .nav__logo-ic { width:36px; height:36px; background:var(--verde-acento); border-radius:8px; display:flex; align-items:center; justify-content:center; }
+    .nav__logo span { color:var(--verde-acento); }
+    /* CLASE 2: lista de navegacion */
+    .nav__ul { display:flex; gap:1.8rem; align-items:center; }
+    .nav__a { color:rgba(255,255,255,.78); font-size:.86rem; font-weight:600; text-transform:uppercase; letter-spacing:.6px; transition:var(--trans); font-family:var(--f-titulo); }
+    .nav__a:hover { color:var(--verde-acento); }
+    /* CLASE 4: !important */
+    .nav__a--cta { background:var(--verde-acento) !important; color:#fff !important; padding:.45rem 1.15rem; border-radius:var(--radio); }
+    .nav__a--cta:hover { background:var(--verde-claro) !important; }
+    .nav__hb { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; }
+    .nav__hb span { display:block; width:24px; height:2px; background:#fff; border-radius:2px; transition:var(--trans); }
+
+    /* =============================================
+       HERO  Clase 5: vh+vw   Clase 6: Flexbox+position
+    ============================================= */
+    .hero {
+      min-height:100vh; /* CLASE 5: vh */
+      background:linear-gradient(160deg,rgba(27,58,45,.95) 0%,rgba(45,106,79,.88) 50%,rgba(64,145,108,.82) 100%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M0 40L40 0L80 40L40 80Z' fill='none' stroke='rgba(255,255,255,.04)' stroke-width='1'/%3E%3C/svg%3E");
+      background-size:cover,80px;
+      display:flex; /* CLASE 6: Flexbox */
+      align-items:center;
+      padding:7rem 1.5rem 4rem;
+      position:relative; /* CLASE 6: positioning */
+      overflow:hidden;
+    }
+    .hero::after { content:''; position:absolute; /* CLASE 6 */ bottom:0;left:0;right:0;height:6px; background:linear-gradient(90deg,var(--verde-acento),var(--amarillo),var(--naranja)); }
+    .hero__g { display:grid; grid-template-columns:1.1fr 1fr; gap:4rem; align-items:center; max-width:var(--max-w); margin:0 auto; position:relative; z-index:1; }
+    .hero__ojo { display:inline-flex; align-items:center; gap:.5rem; background:rgba(82,183,136,.18); border:1px solid rgba(82,183,136,.35); color:#a8e6bf; padding:.35rem 1.1rem; border-radius:50px; font-size:.78rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1.5rem; }
+    /* CLASE 1: h1 */
+    .hero__h1 { font-family:var(--f-titulo); font-size:clamp(2.3rem,5.5vw,4rem); font-weight:900; color:#fff; line-height:1.08; margin-bottom:1.5rem; letter-spacing:-.5px; }
+    .hero__h1 em { font-style:normal; color:var(--verde-acento); }
+    /* CLASE 1: parrafo */
+    .hero__p { font-size:1.08rem; color:rgba(255,255,255,.72); margin-bottom:2.2rem; max-width:500px; line-height:1.75; }
+    .hero__bts { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:3rem; }
+    .hero__metr { display:flex; gap:2.5rem; flex-wrap:wrap; }
+    .metr { border-left:3px solid var(--verde-acento); padding-left:.8rem; }
+    .metr__n { font-family:var(--f-titulo); font-size:2rem; font-weight:900; color:#fff; line-height:1; display:block; }
+    .metr__l { font-size:.74rem; font-weight:600; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.8px; }
+    /* Pilares hero derecha */
+    .hero__pils { display:flex; flex-direction:column; gap:1rem; }
+    .pcard { background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.13); border-radius:var(--radio-lg); padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1.1rem; transition:var(--trans); backdrop-filter:blur(8px); }
+    .pcard:hover { background:rgba(82,183,136,.15); border-color:rgba(82,183,136,.4); transform:translateX(4px); }
+    .pcard__ic { width:50px; height:50px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.35rem; flex-shrink:0; }
+    .pcard__ic--v { background:rgba(82,183,136,.25); color:var(--verde-acento); }
+    .pcard__ic--a { background:rgba(233,196,106,.25); color:var(--amarillo); }
+    .pcard__ic--n { background:rgba(244,162,97,.25); color:var(--naranja); }
+    .pcard__t { font-family:var(--f-titulo); font-size:.95rem; font-weight:700; color:#fff; margin-bottom:.15rem; }
+    .pcard__s { font-size:.82rem; color:rgba(255,255,255,.55); line-height:1.5; }
+    .hero__flecha { position:absolute; bottom:1.5rem; left:50%; transform:translateX(-50%); color:rgba(255,255,255,.35); font-size:1.1rem; animation:flotar 2s ease-in-out infinite; }
+    @keyframes flotar { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(7px)} }
+
+    /* CLASE 2: Ticker animado */
+    .ticker { background:var(--verde-oscuro); padding:1.4rem 0; overflow:hidden; border-top:2px solid rgba(82,183,136,.3); }
+    .ticker__p { display:flex; animation:correr 30s linear infinite; white-space:nowrap; width:max-content; }
+    .ticker__i { font-family:var(--f-titulo); font-size:.75rem; font-weight:700; color:rgba(255,255,255,.35); letter-spacing:2px; text-transform:uppercase; padding:0 2.8rem; border-right:1px solid rgba(255,255,255,.08); flex-shrink:0; }
+    @keyframes correr { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* =============================================
+       NOSOTROS  Clase 7: CSS Grid
+    ============================================= */
+    .nos__g { display:grid; grid-template-columns:1fr 1.1fr; gap:5rem; align-items:center; }
+    .nos__vis { position:relative; } /* CLASE 6: positioning */
+    .nos__img { width:100%; height:440px; border-radius:var(--radio-lg); background:linear-gradient(145deg,var(--verde-oscuro) 0%,#2d6a4f 60%,#40916c 100%); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .nos__img i { font-size:9rem; color:rgba(82,183,136,.2); }
+    /* CLASE 6: position absolute */
+    .nos__fl1 { position:absolute; bottom:-1.5rem; right:-1.5rem; background:var(--verde-acento); color:#fff; padding:1.3rem 1.6rem; border-radius:var(--radio-lg); text-align:center; box-shadow:var(--sombra-lg); }
+    .nos__fl1 span { font-family:var(--f-titulo); font-size:2rem; font-weight:900; display:block; line-height:1; }
+    .nos__fl1 small { font-size:.7rem; opacity:.85; }
+    .nos__fl2 { position:absolute; top:1.5rem; left:-1.5rem; background:var(--amarillo); color:var(--gris-oscuro); padding:.9rem 1.2rem; border-radius:var(--radio); text-align:center; box-shadow:var(--sombra-md); font-family:var(--f-titulo); font-size:.8rem; font-weight:700; }
+    .nos__h2 { font-family:var(--f-titulo); font-size:2rem; font-weight:700; margin-bottom:1rem; line-height:1.2; }
+    .nos__p { color:var(--gris-texto); margin-bottom:1.2rem; }
+    /* CLASE 2: lista desordenada */
+    .lista-v { margin:1rem 0 2rem; display:flex; flex-direction:column; gap:.6rem; }
+    .lista-v li { display:flex; align-items:flex-start; gap:.75rem; font-size:.93rem; color:var(--gris-texto); padding-bottom:.6rem; border-bottom:1px solid rgba(0,0,0,.07); }
+    .lista-v li:last-child { border-bottom:none; }
+    .lista-v li i { color:var(--verde-acento); margin-top:3px; flex-shrink:0; font-size:.85rem; }
+
+    /* =============================================
+       TRES PILARES  Clase 7: Grid   Clase 4: BEM
+    ============================================= */
+    .pilares { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    /* CLASE 4: BEM — .pilar */
+    .pilar { border-radius:var(--radio-lg); overflow:hidden; box-shadow:var(--sombra-md); transition:var(--trans); }
+    .pilar:hover { transform:translateY(-6px); box-shadow:var(--sombra-lg); }
+    /* CLASE 4: BEM — .pilar__cab */
+    .pilar__cab { padding:2rem; display:flex; align-items:center; gap:1rem; }
+    .pilar__cab--ci { background:var(--verde-oscuro); }
+    .pilar__cab--se { background:#1a2d4a; }
+    .pilar__cab--am { background:#2d4a1a; }
+    .pilar__ico { width:56px; height:56px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; flex-shrink:0; }
+    .pilar__ico--ci { background:rgba(82,183,136,.2); color:var(--verde-acento); }
+    .pilar__ico--se { background:rgba(233,196,106,.2); color:var(--amarillo); }
+    .pilar__ico--am { background:rgba(244,162,97,.2); color:var(--naranja); }
+    /* CLASE 4: BEM — .pilar__h3 */
+    .pilar__h3 { font-family:var(--f-titulo); font-size:1rem; font-weight:700; color:#fff; line-height:1.25; }
+    .pilar__sub { font-size:.78rem; color:rgba(255,255,255,.5); margin-top:2px; }
+    .pilar__body { background:var(--blanco); padding:1.5rem 1.8rem; }
+    /* CLASE 2: lista de servicios */
+    .pilar__ul { list-style:none; display:flex; flex-direction:column; gap:.55rem; }
+    .pilar__ul li { display:flex; align-items:flex-start; gap:.6rem; font-size:.88rem; color:var(--gris-texto); padding-bottom:.55rem; border-bottom:1px solid rgba(0,0,0,.06); }
+    .pilar__ul li:last-child { border-bottom:none; }
+    .pilar__ul li i { color:var(--verde-acento); margin-top:3px; flex-shrink:0; font-size:.78rem; }
+    .pilar__pie { padding:0 1.8rem 1.5rem; background:var(--blanco); }
+    .pilar__lnk { display:inline-flex; align-items:center; gap:.4rem; color:var(--verde-medio); font-size:.85rem; font-weight:700; transition:var(--trans); }
+    .pilar__lnk:hover { color:var(--verde-acento); gap:.7rem; }
+
+    /* =============================================
+       PROYECTOS — TABLA (Clase 3)
+    ============================================= */
+    .tabla-w { overflow-x:auto; border-radius:var(--radio-lg); box-shadow:var(--sombra-md); } /* CLASE 6: overflow */
+    /* CLASE 3: Tabla */
+    .tabla-p { width:100%; border-collapse:collapse; background:var(--blanco); }
+    .tabla-p thead { background:var(--verde-oscuro); color:#fff; }
+    .tabla-p th { padding:1rem 1.4rem; text-align:left; font-family:var(--f-titulo); font-size:.78rem; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; }
+    .tabla-p td { padding:1rem 1.4rem; font-size:.9rem; border-bottom:1px solid rgba(0,0,0,.06); vertical-align:middle; }
+    .tabla-p tbody tr { transition:var(--trans); }
+    .tabla-p tbody tr:last-child td { border-bottom:none; }
+    .tabla-p tbody tr:hover { background:rgba(82,183,136,.05); }
+
+    /* =============================================
+       PROTOCOLOS SRT  Clase 7: Grid
+    ============================================= */
+    .proto-g { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+    .proto-i { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); border-radius:var(--radio); padding:1.2rem; display:flex; gap:.8rem; align-items:flex-start; transition:var(--trans); }
+    .proto-i:hover { background:rgba(82,183,136,.12); border-color:rgba(82,183,136,.3); }
+    .proto-i > i { color:var(--verde-acento); font-size:1.1rem; margin-top:2px; flex-shrink:0; }
+    .proto-i__t { font-size:.85rem; color:rgba(255,255,255,.75); line-height:1.5; }
+    .proto-i__r { display:block; font-size:.73rem; color:rgba(255,255,255,.4); margin-top:.2rem; }
+
+    /* =============================================
+       GALERIA  Clase 2: multimedia + Clase 7: Grid
+    ============================================= */
+    .galeria { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:210px 210px; gap:1rem; }
+    .gitem { border-radius:var(--radio-lg); overflow:hidden; position:relative; cursor:pointer; transition:var(--trans); } /* CLASE 6: position */
+    .gitem:hover { transform:scale(1.02); }
+    .gitem:hover .gov { opacity:1; }
+    /* CLASE 7: span de columnas/filas */
+    .gitem--alto  { grid-row:span 2; }
+    .gitem--ancho { grid-column:span 2; }
+    .gitem:nth-child(1){background:linear-gradient(135deg,#1b3a2d,#2d6a4f)}
+    .gitem:nth-child(2){background:linear-gradient(135deg,#2d4a1a,#5a8a2d)}
+    .gitem:nth-child(3){background:linear-gradient(135deg,#1a2d4a,#2d5a8a)}
+    .gitem:nth-child(4){background:linear-gradient(135deg,#4a2d1a,#8a5a2d)}
+    .gitem:nth-child(5){background:linear-gradient(135deg,#2d1a4a,#6a4a8a)}
+    .gov { position:absolute; inset:0; background:rgba(27,58,45,.72); display:flex; align-items:center; justify-content:center; opacity:0; transition:var(--trans); }
+    .gov i { font-size:2rem; color:#fff; }
+    .geti { position:absolute; bottom:1rem; left:1rem; font-size:.82rem; font-weight:700; color:#fff; text-shadow:0 1px 8px rgba(0,0,0,.55); z-index:1; }
+    /* CLASE 2: iframe video responsive */
+    .vid-w { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:var(--radio-lg); box-shadow:var(--sombra-md); margin-top:2.5rem; }
+    .vid-w iframe { position:absolute; top:0;left:0;width:100%;height:100%;border:none; } /* CLASE 6 */
+
+    /* =============================================
+       CONTACTO — FORMULARIO (Clase 3)
+    ============================================= */
+    .cont-g { display:grid; grid-template-columns:1fr 1.6fr; gap:4rem; align-items:start; }
+    .cont-info h3 { font-family:var(--f-titulo); font-size:1.6rem; font-weight:700; color:#fff; margin-bottom:.8rem; }
+    .cont-info > p { color:rgba(255,255,255,.6); margin-bottom:2rem; }
+    /* CLASE 2: lista de contacto */
+    .ic-lista { display:flex; flex-direction:column; gap:1.1rem; }
+    .ic-lista li { display:flex; align-items:center; gap:1rem; }
+    .ic-lista__ic { width:42px; height:42px; background:rgba(82,183,136,.15); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--verde-acento); flex-shrink:0; }
+    .ic-lista__t { font-size:.88rem; color:rgba(255,255,255,.68); }
+    /* CLASE 3: formulario */
+    .form-card { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:var(--radio-lg); padding:2.5rem; }
+    .form-fila { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .form-g { margin-bottom:1.4rem; }
+    /* CLASE 3: label */
+    .form-g label { display:block; font-size:.8rem; font-weight:700; font-family:var(--f-titulo); color:rgba(255,255,255,.72); margin-bottom:.45rem; }
+    /* CLASE 3: input, textarea, select */
+    .form-g input,.form-g textarea,.form-g select { width:100%; padding:.82rem 1rem; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.13); border-radius:var(--radio); color:#fff; font-family:var(--f-cuerpo); font-size:.9rem; transition:var(--trans); }
+    .form-g input:focus,.form-g textarea:focus,.form-g select:focus { outline:none; border-color:var(--verde-acento); background:rgba(82,183,136,.07); }
+    .form-g input::placeholder,.form-g textarea::placeholder { color:rgba(255,255,255,.27); }
+    .form-g textarea { resize:vertical; min-height:130px; }
+    .form-g select option { background:var(--verde-oscuro); }
+    .btn-send { width:100%; padding:1rem; font-size:1rem; justify-content:center; }
+
+    /* =============================================
+       FOOTER  Clase 1: semantico + Clase 7: Grid
+    ============================================= */
+    .footer { background:#0e1a14; color:rgba(255,255,255,.55); padding:4.5rem 1.5rem 2rem; }
+    .footer__g { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; max-width:var(--max-w); margin:0 auto 3.5rem; }
+    .footer__nm { font-family:var(--f-titulo); font-size:1.4rem; font-weight:900; color:#fff; }
+    .footer__nm span { color:var(--verde-acento); }
+    .footer__marca p { margin:.9rem 0 1.3rem; font-size:.87rem; line-height:1.75; opacity:.55; }
+    /* CLASE 2: redes con Font Awesome */
+    .redes { display:flex; gap:.6rem; }
+    .redes a { width:36px;height:36px;background:rgba(255,255,255,.07);border-radius:var(--radio);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.45);font-size:.9rem;transition:var(--trans); }
+    .redes a:hover { background:var(--verde-acento); color:#fff; }
+    .footer__col h4 { font-family:var(--f-titulo); font-size:.78rem; font-weight:800; color:#fff; text-transform:uppercase; letter-spacing:1.3px; margin-bottom:1.2rem; }
+    /* CLASE 2: lista del footer */
+    .f-lista { display:flex; flex-direction:column; gap:.6rem; }
+    .f-lista a { font-size:.87rem; color:rgba(255,255,255,.48); transition:var(--trans); }
+    .f-lista a:hover { color:var(--verde-acento); }
+    .footer__pie { max-width:var(--max-w);margin:0 auto;padding-top:2rem;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.82rem; }
+    .footer__pie a { color:var(--verde-acento); }
+
+    /* =============================================
+       CLASE 7: MEDIA QUERIES
+    ============================================= */
+    @media (max-width:1024px) {
+      .hero__g  { grid-template-columns:1fr; }
+      .hero__pils { display:grid; grid-template-columns:1fr 1fr; }
+      .nos__g   { grid-template-columns:1fr; gap:3rem; }
+      .pilares  { grid-template-columns:1fr; }
+      .cont-g   { grid-template-columns:1fr; gap:2.5rem; }
+      .footer__g{ grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:768px) {
+      .nav__ul { display:none; flex-direction:column; position:absolute; top:100%;left:0;width:100%; background:rgba(27,58,45,.98);padding:1rem;gap:0;border-top:1px solid rgba(255,255,255,.08); }
+      .nav__ul.on { display:flex; }
+      .nav__ul li { width:100%; }
+      .nav__a { display:block;padding:.85rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.06); }
+      .nav__hb { display:flex; }
+      .hero__pils { grid-template-columns:1fr; }
+      .galeria { grid-template-columns:1fr 1fr;grid-template-rows:auto; }
+      .gitem--alto,.gitem--ancho { grid-column:span 1;grid-row:span 1; }
+      .form-fila { grid-template-columns:1fr; }
+    }
+    @media (max-width:480px) {
+      .secc { padding:3.5rem 0; }
+      .hero { padding:6rem 1rem 3rem; }
+      .hero__bts { flex-direction:column; align-items:flex-start; }
+      .hero__metr { gap:1.5rem; }
+      .footer__g { grid-template-columns:1fr;gap:2rem; }
+      .footer__pie { flex-direction:column;text-align:center; }
+    }
+  </style>
+</head>
+
+<!-- =============================================
+     CLASE 1: ESTRUCTURA SEMANTICA HTML
+============================================= -->
+<body>
+
+<!-- CLASE 1: <header> semantico -->
+<header class="nav" id="navBar" role="banner">
+  <div class="nav__i">
+    <!-- CLASE 2: enlace <a> -->
+    <a href="#inicio" class="nav__logo" aria-label="PF Ingeniería — inicio">
+      <span class="nav__logo-ic" aria-hidden="true">
+        <i class="fa-solid fa-compass-drafting" style="color:#fff;font-size:.95rem"></i>
+      </span>
+      PF<span>Ingeniería</span>
+    </a>
+    <!-- CLASE 2: lista <ul> <li> de navegación -->
+    <ul class="nav__ul" id="navUl" role="menubar">
+      <li><a href="#inicio"     class="nav__a">Inicio</a></li>
+      <li><a href="#nosotros"   class="nav__a">Nosotros</a></li>
+      <li><a href="#servicios"  class="nav__a">Servicios</a></li>
+      <li><a href="#proyectos"  class="nav__a">Proyectos</a></li>
+      <li><a href="#galeria"    class="nav__a">Galería</a></li>
+      <li><a href="#contacto"   class="nav__a nav__a--cta">Contacto</a></li>
+    </ul>
+    <button class="nav__hb" id="hb" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- CLASE 1: <main> semantico -->
+<main id="main">
+
+  <!-- ══ HERO ══════════════════════════════════ -->
+  <section class="hero" id="inicio" aria-label="Sección principal">
+    <div class="hero__g">
+      <!-- Texto -->
+      <div>
+        <span class="hero__ojo">
+          <i class="fa-solid fa-certificate" aria-hidden="true"></i>
+          Pre-entrega · Talento Tech · Front-End JS
+        </span>
+        <!-- CLASE 1: h1 -->
+        <h1 class="hero__h1">
+          Soluciones Integrales<br>en <em>Ingeniería Civil,</em><br>
+          Seguridad &amp; Ambiente
+        </h1>
+        <!-- CLASE 1: párrafo con <strong> y <em> -->
+        <p class="hero__p">
+          Expertos en <strong>proyectos hidráulicos, viales y estructuras</strong>.
+          Consultoría integral en <em>Seguridad e Higiene</em> y
+          <em>Gestión Ambiental</em> en toda la Provincia de Buenos Aires.
+        </p>
+        <div class="hero__bts">
+          <!-- CLASE 2: enlaces <a href> internos -->
+          <a href="#servicios" class="btn btn--p">
+            <i class="fa-solid fa-hard-hat" aria-hidden="true"></i> Ver Servicios
+          </a>
+          <a href="#contacto" class="btn btn--b">
+            <i class="fa-regular fa-envelope" aria-hidden="true"></i> Consultanos
+          </a>
+        </div>
+        <div class="hero__metr">
+          <div class="metr"><span class="metr__n" id="m1">0</span><span class="metr__l">Proyectos ejecutados</span></div>
+          <div class="metr"><span class="metr__n" id="m2">0</span><span class="metr__l">Años de experiencia</span></div>
+          <div class="metr"><span class="metr__n" id="m3">0</span><span class="metr__l">Clientes activos</span></div>
+        </div>
+      </div>
+      <!-- Pilares derecha -->
+      <div class="hero__pils">
+        <div class="pcard">
+          <div class="pcard__ic pcard__ic--v"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></div>
+          <div>
+            <p class="pcard__t">Ingeniería Civil</p>
+            <p class="pcard__s">Proyectos hidráulicos, viales, estructuras y relevamientos topográficos.</p>
+          </div>
+        </div>
+        <div class="pcard">
+          <div class="pcard__ic pcard__ic--a"><i class="fa-solid fa-helmet-safety" aria-hidden="true"></i></div>
+          <div>
+            <p class="pcard__t">Seguridad e Higiene Laboral</p>
+            <p class="pcard__s">Consultoría integral, protocolos SRT y programas preventivos.</p>
+          </div>
+        </div>
+        <div class="pcard">
+          <div class="pcard__ic pcard__ic--n"><i class="fa-solid fa-leaf" aria-hidden="true"></i></div>
+          <div>
+            <p class="pcard__t">Gestión Ambiental</p>
+            <p class="pcard__s">Habilitaciones ambientales, residuos especiales y efluentes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="#nosotros" class="hero__flecha" aria-label="Ver más">
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <!-- ══ TICKER (Clase 2: animación multimedia) ══ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__p">
+      <span class="ticker__i">🏗 Ingeniería Civil</span>
+      <span class="ticker__i">⛑ Seguridad e Higiene</span>
+      <span class="ticker__i">🌿 Gestión Ambiental</span>
+      <span class="ticker__i">📐 Topografía</span>
+      <span class="ticker__i">💧 Hidráulica</span>
+      <span class="ticker__i">🛣 Infraestructura Vial</span>
+      <span class="ticker__i">🏢 Estructuras</span>
+      <span class="ticker__i">♻ Residuos Especiales</span>
+      <span class="ticker__i">📋 Protocolos SRT</span>
+      <span class="ticker__i">📜 Cert. Aptitud Ambiental</span>
+      <span class="ticker__i">🏗 Ingeniería Civil</span>
+      <span class="ticker__i">⛑ Seguridad e Higiene</span>
+      <span class="ticker__i">🌿 Gestión Ambiental</span>
+      <span class="ticker__i">📐 Topografía</span>
+      <span class="ticker__i">💧 Hidráulica</span>
+      <span class="ticker__i">🛣 Infraestructura Vial</span>
+      <span class="ticker__i">🏢 Estructuras</span>
+      <span class="ticker__i">♻ Residuos Especiales</span>
+      <span class="ticker__i">📋 Protocolos SRT</span>
+      <span class="ticker__i">📜 Cert. Aptitud Ambiental</span>
+    </div>
+  </div>
+
+  <!-- ══ NOSOTROS (Clase 7: Grid) ══════════════ -->
+  <section class="secc" id="nosotros" aria-labelledby="tit-nos">
+    <div class="cont">
+      <div class="nos__g">
+        <div class="nos__vis rev">
+          <div class="nos__img" role="img" aria-label="Equipo de ingenieros en obra">
+            <i class="fa-solid fa-city" aria-hidden="true"></i>
+          </div>
+          <!-- CLASE 6: position absolute -->
+          <div class="nos__fl1"><span>+200</span><small>Proyectos ejecutados</small></div>
+          <div class="nos__fl2">Prov. de Buenos Aires</div>
+        </div>
+        <div class="rev d2">
+          <span class="etiq"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Sobre Nosotros</span>
+          <!-- CLASE 1: h2 -->
+          <h2 class="nos__h2" id="tit-nos">Consultoría integral para empresas que necesitan cumplir</h2>
+          <!-- CLASE 1: párrafos con <strong> y <em> -->
+          <p class="nos__p">Somos un estudio de ingeniería radicado en <strong>La Plata, Buenos Aires</strong>, con más de 15 años de trayectoria en proyectos de ingeniería civil, asesoramiento en seguridad laboral y gestión ambiental para empresas de todos los rubros.</p>
+          <p class="nos__p">Nuestros profesionales están <em>matriculados</em> y acreditados ante organismos provinciales y nacionales, garantizando el cumplimiento de la legislación vigente.</p>
+          <!-- CLASE 2: lista desordenada -->
+          <ul class="lista-v" aria-label="Fortalezas del estudio">
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Profesionales <strong>matriculados</strong> en el COPIME y CAPBA</li>
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Registro en el <strong>Ministerio de Ambiente</strong> de PBA (RUPAYAR)</li>
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Registro en la <strong>SRT</strong> como profesionales de seguridad</li>
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Cobertura en toda la <strong>Provincia de Buenos Aires</strong></li>
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Habilitaciones según <strong>Ley 11.459</strong> y <strong>11.723</strong></li>
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Implementación de normas <strong>ISO 14001</strong> e <strong>ISO 45001</strong></li>
+          </ul>
+          <a href="#contacto" class="btn btn--d">
+            <i class="fa-solid fa-handshake" aria-hidden="true"></i> Solicitar asesoramiento
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SERVICIOS — TRES PILARES ══════════════ -->
+  <section class="secc secc--gris" id="servicios" aria-labelledby="tit-serv">
+    <div class="cont">
+      <div class="cab rev">
+        <span class="etiq"><i class="fa-solid fa-gears" aria-hidden="true"></i> Servicios</span>
+        <!-- CLASE 1: h2 -->
+        <h2 class="tit-secc" id="tit-serv">Las tres áreas de nuestra consultoría</h2>
+        <p class="desc">Brindamos un servicio integral que cubre todos los aspectos técnicos, normativos y ambientales que su empresa necesita cumplir.</p>
+      </div>
+      <!-- CLASE 4: BEM + CLASE 7: Grid -->
+      <div class="pilares">
+
+        <!-- Pilar 1: Civil -->
+        <article class="pilar rev d1">
+          <div class="pilar__cab pilar__cab--ci">
+            <div class="pilar__ico pilar__ico--ci"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></div>
+            <div>
+              <h3 class="pilar__h3">Ingeniería Civil</h3>
+              <p class="pilar__sub">Diseño · Cálculo · Dirección de obra</p>
+            </div>
+          </div>
+          <div class="pilar__body">
+            <!-- CLASE 2: lista desordenada -->
+            <ul class="pilar__ul">
+              <li><i class="fa-solid fa-water" aria-hidden="true"></i><span><strong>Proyectos hidráulicos</strong>: pluviales, cloacales, agua potable y drenaje</span></li>
+              <li><i class="fa-solid fa-road" aria-hidden="true"></i><span><strong>Infraestructura vial</strong>: diseño geométrico, pavimento y señalización</span></li>
+              <li><i class="fa-solid fa-building" aria-hidden="true"></i><span><strong>Estructuras</strong>: cálculo estructural en hormigón armado y metálicas</span></li>
+              <li><i class="fa-solid fa-map" aria-hidden="true"></i><span><strong>Relevamientos topográficos</strong> y planialtimétricos</span></li>
+              <li><i class="fa-solid fa-file-contract" aria-hidden="true"></i><span>Dirección de obra y <strong>representación técnica</strong></span></li>
+            </ul>
+          </div>
+          <div class="pilar__pie">
+            <a href="#contacto" class="pilar__lnk">Consultar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </article>
+
+        <!-- Pilar 2: Seguridad -->
+        <article class="pilar rev d2">
+          <div class="pilar__cab pilar__cab--se">
+            <div class="pilar__ico pilar__ico--se"><i class="fa-solid fa-helmet-safety" aria-hidden="true"></i></div>
+            <div>
+              <h3 class="pilar__h3">Seguridad e Higiene Laboral</h3>
+              <p class="pilar__sub">Prevención · Protocolos · SRT</p>
+            </div>
+          </div>
+          <div class="pilar__body">
+            <ul class="pilar__ul">
+              <li><i class="fa-solid fa-file-shield" aria-hidden="true"></i><span>Documentación y registros exigidos por la <strong>SRT</strong></span></li>
+              <li><i class="fa-solid fa-fire-extinguisher" aria-hidden="true"></i><span><strong>Mapas de riesgo</strong>, planos de evacuación e incendio</span></li>
+              <li><i class="fa-solid fa-hard-hat" aria-hidden="true"></i><span>Registro y entrega de <strong>EPP</strong> (Res. SRT 299/11)</span></li>
+              <li><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i><span>Capacitaciones y <strong>simulacros de evacuación</strong></span></li>
+              <li><i class="fa-solid fa-bolt" aria-hidden="true"></i><span>Medición de <strong>puesta a tierra</strong> (Res. SRT 900/15)</span></li>
+            </ul>
+          </div>
+          <div class="pilar__pie">
+            <a href="#protocolos" class="pilar__lnk">Ver protocolos <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </article>
+
+        <!-- Pilar 3: Ambiental -->
+        <article class="pilar rev d3">
+          <div class="pilar__cab pilar__cab--am">
+            <div class="pilar__ico pilar__ico--am"><i class="fa-solid fa-leaf" aria-hidden="true"></i></div>
+            <div>
+              <h3 class="pilar__h3">Gestión Ambiental</h3>
+              <p class="pilar__sub">Habilitaciones · Efluentes · Residuos</p>
+            </div>
+          </div>
+          <div class="pilar__body">
+            <ul class="pilar__ul">
+              <li><i class="fa-solid fa-certificate" aria-hidden="true"></i><span><strong>Certificado de Aptitud Ambiental</strong> (CAA) — Leyes 11.459 y 11.723</span></li>
+              <li><i class="fa-solid fa-trash-can" aria-hidden="true"></i><span>Gestión de <strong>residuos especiales</strong> e inscripción de generadores</span></li>
+              <li><i class="fa-solid fa-wind" aria-hidden="true"></i><span>Permiso de descarga de <strong>efluentes gaseosos</strong> (Ley 5965)</span></li>
+              <li><i class="fa-solid fa-droplet" aria-hidden="true"></i><span>Empadronamiento al <strong>BUDURH</strong> y permisos de vuelco</span></li>
+              <li><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i><span>Evaluación de <strong>aspectos e impactos ambientales</strong></span></li>
+            </ul>
+          </div>
+          <div class="pilar__pie">
+            <a href="#contacto" class="pilar__lnk">Consultar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PROYECTOS — TABLA HTML (Clase 3) ══════ -->
+  <section class="secc" id="proyectos" aria-labelledby="tit-proj">
+    <div class="cont">
+      <div class="cab rev">
+        <span class="etiq"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> Portfolio</span>
+        <h2 class="tit-secc" id="tit-proj">Proyectos destacados</h2>
+        <p class="desc">Una selección de los trabajos realizados en toda la Provincia de Buenos Aires.</p>
+      </div>
+      <!-- CLASE 3: Tabla HTML completa -->
+      <div class="tabla-w rev">
+        <table class="tabla-p" aria-label="Proyectos destacados">
+          <!-- CLASE 3: thead + th -->
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Proyecto</th>
+              <th scope="col">Municipio / Comitente</th>
+              <th scope="col">Área</th>
+              <th scope="col">Año</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <!-- CLASE 3: tbody + tr + td -->
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td><strong>Colector pluvial Arroyo Del Gato</strong></td>
+              <td>Municipio de La Plata</td>
+              <td>Hidráulica</td>
+              <td>2023</td>
+              <td><span class="badge badge--ok"><i class="fa-solid fa-circle-check"></i> Completado</span></td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td><strong>Pavimentación Ruta Provincial 36</strong></td>
+              <td>DVBA — Dist. 1</td>
+              <td>Infraestructura Vial</td>
+              <td>2023</td>
+              <td><span class="badge badge--ok"><i class="fa-solid fa-circle-check"></i> Completado</span></td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td><strong>Certificado de Aptitud Ambiental — Frigorífico</strong></td>
+              <td>Partido de Berisso</td>
+              <td>Gestión Ambiental</td>
+              <td>2024</td>
+              <td><span class="badge badge--ok"><i class="fa-solid fa-circle-check"></i> Completado</span></td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td><strong>Programa anual Seguridad e Higiene</strong></td>
+              <td>Planta industrial — Ensenada</td>
+              <td>Seguridad Laboral</td>
+              <td>2024</td>
+              <td><span class="badge badge--wip"><i class="fa-solid fa-spinner fa-spin"></i> En curso</span></td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td><strong>Estructura galpón metálico 3.000 m²</strong></td>
+              <td>Parque Industrial Brandsen</td>
+              <td>Estructuras</td>
+              <td>2024</td>
+              <td><span class="badge badge--wip"><i class="fa-solid fa-spinner fa-spin"></i> En curso</span></td>
+            </tr>
+            <tr>
+              <td>06</td>
+              <td><strong>Relevamiento topográfico catastral</strong></td>
+              <td>Partido de Chascomús</td>
+              <td>Topografía</td>
+              <td>2025</td>
+              <td><span class="badge badge--pla"><i class="fa-solid fa-clock"></i> Planificado</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PROTOCOLOS SRT (Clase 7: Grid) ════════ -->
+  <section class="secc secc--verde" id="protocolos" aria-labelledby="tit-prot">
+    <div class="cont">
+      <div class="cab rev">
+        <span class="etiq"><i class="fa-solid fa-file-shield" aria-hidden="true"></i> Seguridad e Higiene</span>
+        <h2 class="tit-secc" id="tit-prot" style="color:#fff">Protocolos SRT que gestionamos</h2>
+        <p class="desc">Preparamos toda la documentación requerida por la Superintendencia de Riesgos del Trabajo.</p>
+      </div>
+      <!-- CLASE 7: Grid auto-fit -->
+      <div class="proto-g rev">
+        <div class="proto-i"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i><div><strong class="proto-i__t">Protocolo de Iluminación</strong><span class="proto-i__r">Res. SRT 84/11</span></div></div>
+        <div class="proto-i"><i class="fa-solid fa-volume-high" aria-hidden="true"></i><div><strong class="proto-i__t">Protocolo de Ruido</strong><span class="proto-i__r">Res. SRT 85/11</span></div></div>
+        <div class="proto-i"><i class="fa-solid fa-wind" aria-hidden="true"></i><div><strong class="proto-i__t">Contaminantes Ambientales</strong><span class="proto-i__r">Res. SRT 861/15</span></div></div>
+        <div class="proto-i"><i class="fa-solid fa-person-digging" aria-hidden="true"></i><div><strong class="proto-i__t">Protocolo de Ergonomía</strong><span class="proto-i__r">Res. SRT 886/15</span></div></div>
+        <div class="proto-i"><i class="fa-solid fa-bolt" aria-hidden="true"></i><div><strong class="proto-i__t">Medición de Puesta a Tierra</strong><span class="proto-i__r">Res. SRT 900/15</span></div></div>
+        <div class="proto-i"><i class="fa-solid fa-vest" aria-hidden="true"></i><div><strong class="proto-i__t">Entrega de EPP</strong><span class="proto-i__r">Res. SRT 299/11</span></div></div>
+        <div class="proto-i"><i class="fa-solid fa-fire" aria-hidden="true"></i><div><strong class="proto-i__t">Mapas de Riesgo e Incendio</strong><span class="proto-i__r">Anexo III — Res. SRT</span></div></div>
+        <div class="proto-i"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><div><strong class="proto-i__t">Plan de Respuesta a Emergencias</strong><span class="proto-i__r">ISO 45001</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ GALERIA (Clase 2: multimedia + Clase 7: Grid) ══ -->
+  <section class="secc secc--gris" id="galeria" aria-labelledby="tit-gal">
+    <div class="cont">
+      <div class="cab rev">
+        <span class="etiq"><i class="fa-solid fa-images" aria-hidden="true"></i> Galería</span>
+        <h2 class="tit-secc" id="tit-gal">Nuestros trabajos en imágenes</h2>
+      </div>
+      <!-- CLASE 7: Grid con spans -->
+      <div class="galeria rev" role="list" aria-label="Galería de proyectos">
+        <!-- CLASE 2: figure + figcaption -->
+        <figure class="gitem gitem--alto" role="listitem">
+          <div class="gov" aria-hidden="true"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+          <figcaption class="geti">💧 Obra Hidráulica</figcaption>
+        </figure>
+        <figure class="gitem gitem--ancho" role="listitem">
+          <div class="gov" aria-hidden="true"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+          <figcaption class="geti">🛣 Infraestructura Vial</figcaption>
+        </figure>
+        <figure class="gitem" role="listitem">
+          <div class="gov" aria-hidden="true"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+          <figcaption class="geti">📐 Relevamiento Topográfico</figcaption>
+        </figure>
+        <figure class="gitem" role="listitem">
+          <div class="gov" aria-hidden="true"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+          <figcaption class="geti">⛑ Capacitación SyH</figcaption>
+        </figure>
+        <figure class="gitem" role="listitem">
+          <div class="gov" aria-hidden="true"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+          <figcaption class="geti">🌿 Gestión Ambiental</figcaption>
+        </figure>
+      </div>
+      <!-- CLASE 2: iframe video YouTube -->
+      <div class="rev d2">
+        <h3 style="font-family:var(--f-titulo);font-size:1.15rem;font-weight:700;margin:2.5rem 0 1rem;color:var(--gris-oscuro);">
+          <i class="fa-brands fa-youtube" style="color:#e02020" aria-hidden="true"></i>
+          Presentación institucional
+        </h3>
+        <div class="vid-w">
+          <!-- CLASE 2: iframe con atributos de accesibilidad -->
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  title="Presentación institucional PF Ingeniería"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTACTO — FORMULARIO (Clase 3) ══════ -->
+  <section class="secc secc--oscuro" id="contacto" aria-labelledby="tit-cont">
+    <div class="cont">
+      <div class="cab rev">
+        <span class="etiq"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Contacto</span>
+        <!-- CLASE 1: h2 -->
+        <h2 class="tit-secc" id="tit-cont" style="color:#fff">¿Necesitás asesoramiento?</h2>
+        <p class="desc">Contanos tu caso y te respondemos en el día. Atendemos toda la Provincia de Buenos Aires.</p>
+      </div>
+      <div class="cont-g">
+        <!-- Datos -->
+        <div class="cont-info rev">
+          <!-- CLASE 1: h3 subsección -->
+          <h3>Estamos para ayudarte</h3>
+          <p>Nuestro equipo de ingenieros te asesora desde el proyecto hasta la habilitación final.</p>
+          <!-- CLASE 2: lista con Font Awesome -->
+          <ul class="ic-lista" aria-label="Datos de contacto">
+            <li>
+              <span class="ic-lista__ic" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
+              <span class="ic-lista__t">La Plata, Provincia de Buenos Aires, Argentina</span>
+            </li>
+            <li>
+              <span class="ic-lista__ic" aria-hidden="true"><i class="fa-solid fa-phone"></i></span>
+              <!-- CLASE 2: enlace tel: -->
+              <a href="tel:+542214000000" class="ic-lista__t">+54 221 400-0000</a>
+            </li>
+            <li>
+              <span class="ic-lista__ic" aria-hidden="true"><i class="fa-regular fa-envelope"></i></span>
+              <!-- CLASE 2: enlace mailto: -->
+              <a href="mailto:contacto@pfingenieria.com.ar" class="ic-lista__t">contacto@pfingenieria.com.ar</a>
+            </li>
+            <li>
+              <span class="ic-lista__ic" aria-hidden="true"><i class="fa-solid fa-clock"></i></span>
+              <span class="ic-lista__t">Lunes a Viernes · 9:00 – 18:00 hs</span>
+            </li>
+            <li>
+              <span class="ic-lista__ic" aria-hidden="true"><i class="fa-brands fa-whatsapp"></i></span>
+              <!-- CLASE 2: enlace externo WhatsApp -->
+              <a href="https://wa.me/5492214000000" target="_blank" rel="noopener noreferrer" class="ic-lista__t">Escribinos por WhatsApp</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ═══ FORMULARIO (Clase 3) ═══ -->
+        <form class="form-card rev d2"
+              action="https://formspree.io/f/xykvlbgy"
+              method="POST" novalidate
+              aria-label="Formulario de consulta profesional">
+
+          <div class="form-fila">
+            <!-- CLASE 3: label + input text -->
+            <div class="form-g">
+              <label for="nombre">Nombre y Apellido *</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Ing. Juan Pérez" required autocomplete="name">
+            </div>
+            <!-- CLASE 3: label + input email -->
+            <div class="form-g">
+              <label for="email">Correo Electrónico *</label>
+              <input type="email" id="email" name="email" placeholder="juan@empresa.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="form-fila">
+            <!-- CLASE 3: label + input tel -->
+            <div class="form-g">
+              <label for="tel">Teléfono / WhatsApp</label>
+              <input type="tel" id="tel" name="telefono" placeholder="+54 221 ..." autocomplete="tel">
+            </div>
+            <!-- CLASE 3: label + select con optgroup -->
+            <div class="form-g">
+              <label for="servicio">Área de interés *</label>
+              <select id="servicio" name="servicio" required>
+                <option value="">-- Seleccioná --</option>
+                <optgroup label="Ingeniería Civil">
+                  <option value="hidraulica">Proyectos hidráulicos</option>
+                  <option value="vial">Infraestructura vial</option>
+                  <option value="estructuras">Estructuras</option>
+                  <option value="topografia">Relevamientos topográficos</option>
+                </optgroup>
+                <optgroup label="Seguridad Laboral">
+                  <option value="srt">Documentación SRT</option>
+                  <option value="capacitacion">Capacitaciones</option>
+                  <option value="medicion">Mediciones / protocolos</option>
+                </optgroup>
+                <optgroup label="Gestión Ambiental">
+                  <option value="caa">Certificado Aptitud Ambiental</option>
+                  <option value="residuos">Residuos especiales</option>
+                  <option value="efluentes">Efluentes / permisos</option>
+                </optgroup>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-g">
+            <label for="empresa">Empresa / Organismo</label>
+            <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa" autocomplete="organization">
+          </div>
+
+          <!-- CLASE 3: label + textarea -->
+          <div class="form-g">
+            <label for="mensaje">Descripción de la consulta *</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Describí brevemente tu proyecto o necesidad..." required></textarea>
+          </div>
+
+          <!-- Campo anti-spam Formspree -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true">
+
+          <button type="submit" class="btn btn--p btn-send">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Enviar Consulta
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ FOOTER (Clase 1: semántico + Clase 7: Grid) ═══ -->
+<footer class="footer" role="contentinfo">
+  <!-- CLASE 7: Grid de columnas -->
+  <div class="footer__g">
+    <div class="footer__marca">
+      <div class="footer__nm">PF<span>Ingeniería</span></div>
+      <p>Consultoría integral en Ingeniería Civil, Seguridad e Higiene Laboral y Gestión Ambiental en toda la Provincia de Buenos Aires, Argentina.</p>
+      <!-- CLASE 2: redes sociales con Font Awesome -->
+      <div class="redes" aria-label="Redes sociales">
+        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+        <a href="https://wa.me/5492214000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+      </div>
+    </div>
+    <div class="footer__col">
+      <!-- CLASE 1: h4 en footer -->
+      <h4>Ingeniería Civil</h4>
+      <!-- CLASE 2: lista de enlaces -->
+      <ul class="f-lista">
+        <li><a href="#servicios">Proyectos Hidráulicos</a></li>
+        <li><a href="#servicios">Infraestructura Vial</a></li>
+        <li><a href="#servicios">Estructuras</a></li>
+        <li><a href="#servicios">Topografía</a></li>
+        <li><a href="#servicios">Dirección de Obra</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Seguridad Laboral</h4>
+      <ul class="f-lista">
+        <li><a href="#servicios">Documentación SRT</a></li>
+        <li><a href="#protocolos">Protocolos de medición</a></li>
+        <li><a href="#servicios">Mapas de riesgo</a></li>
+        <li><a href="#servicios">Capacitaciones</a></li>
+        <li><a href="#servicios">ISO 45001</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Gestión Ambiental</h4>
+      <ul class="f-lista">
+        <li><a href="#servicios">Cert. Aptitud Ambiental</a></li>
+        <li><a href="#servicios">Residuos Especiales</a></li>
+        <li><a href="#servicios">Efluentes y permisos</a></li>
+        <li><a href="#servicios">BUDURH</a></li>
+        <li><a href="#servicios">ISO 14001</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__pie">
+    <p>© 2025 PF Ingeniería · Todos los derechos reservados · La Plata, PBA.</p>
+    <p>Desarrollado con ❤ · <a href="https://talentotech.bue.edu.ar" target="_blank" rel="noopener noreferrer">Talento Tech</a> · Pre-entrega Front-End JS</p>
+  </div>
+</footer>
+
+<script>
+  const hb = document.getElementById('hb');
+  const ul = document.getElementById('navUl');
+  hb.addEventListener('click', () => {
+    const open = ul.classList.toggle('on');
+    hb.setAttribute('aria-expanded', open);
+  });
+  document.querySelectorAll('.nav__a').forEach(a => {
+    a.addEventListener('click', () => { ul.classList.remove('on'); hb.setAttribute('aria-expanded','false'); });
+  });
+
+  /* Nav compacto */
+  const nb = document.getElementById('navBar');
+  window.addEventListener('scroll', () => { nb.classList.toggle('nav--chico', scrollY > 60); }, { passive:true });
+
+  /* Scroll reveal */
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.13 });
+  document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+
+  /* Contadores hero */
+  function count(el, end, suf, ms=2000) {
+    const step = end/(ms/16); let cur=0;
+    const t = setInterval(()=>{ cur=Math.min(cur+step,end); el.textContent=Math.round(cur)+suf; if(cur>=end)clearInterval(t); },16);
+  }
+  const ho = new IntersectionObserver(([e])=>{
+    if(e.isIntersecting){
+      count(document.getElementById('m1'),200,'+');
+      count(document.getElementById('m2'),15,'+');
+      count(document.getElementById('m3'),60,'+');
+      ho.disconnect();
+    }
+  },{threshold:.35});
+  ho.observe(document.querySelector('.hero'));
+
+  /* Validación formulario */
+  const f = document.querySelector('form.form-card');
+  if(f) f.addEventListener('submit', e => {
+    const ids = ['nombre','email','servicio','mensaje'];
+    let ok=true;
+    ids.forEach(id=>{
+      const c=f.querySelector('#'+id);
+      if(c&&!c.value.trim()){ c.style.borderColor='#e74c3c'; ok=false; }
+      else if(c) c.style.borderColor='';
+    });
+    if(!ok){ e.preventDefault(); alert('Completá los campos obligatorios (*).'); }
+  });
+</script>
+</body>
+</html>
